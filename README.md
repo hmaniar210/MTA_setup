@@ -1,7 +1,7 @@
 
 # 🚀  Automation Project: Environment Setup Guide
 
-This guide walks you through setting up the local development environment for Tandem automation projects on **Windows, macOS, and Linux**.
+This guide walks you through setting up the local development environment for automation projects on **Windows, macOS, and Linux**.
 
 ---
 
