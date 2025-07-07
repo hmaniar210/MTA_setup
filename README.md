@@ -1,127 +1,172 @@
 
-# 🚀  Automation Project: Environment Setup Guide
+# 📱 Mobile Automation Team – Complete Setup Guide
 
-This guide walks you through setting up the local development environment for automation projects on **Windows, macOS, and Linux**.
+This guide will walk you through setting up your local environment for working on the **Mobile Test Automation** project at Tandem.
 
 ---
 
-## 🧰 Required Software
+## 🔗 Repository Access
 
-### 1. Git
+**Clone this repo**:
 
-**Install Git:**
-
-- **Windows:** [https://git-scm.com/downloads](https://git-scm.com/downloads)
-- **macOS:** Git is often pre-installed. If not, install via:
-  ```bash
-  brew install git
-  ```
-- **Linux (Debian/Ubuntu):**
-  ```bash
-  sudo apt update && sudo apt install git
-  ```
-
-**Verify Installation:**
 ```bash
-git --version
+git clone https://github.com/Tandem-Mobile/mobile-test-automation.git
+```
+
+### ✅ Organization Access
+
+Make sure you're a member of:
+- [`tandem-diabetes`](https://github.com/tandem-diabetes)
+- [`tandem-mobile`](https://github.com/Tandem-Mobile)
+
+If not, raise an **ITSD ticket** for access and reach out to your team for guidance.
+
+---
+
+## 🔐 Generate GitHub Personal Access Token
+
+1. Go to **GitHub** → **Settings**
+2. Navigate to:
+   ```
+   Developer Settings → Personal access tokens → Tokens (classic)
+   ```
+3. Click **Generate new token (classic)**
+
+### ⚙️ Configuration:
+
+- **Name**: Use a clear label
+- **Expiration**: Select **No expiration**
+- **Scopes** to check:
+
+#### `repo`
+- repo:status
+- repo_deployment
+- public_repo
+- repo:invite
+- security_events
+
+#### `write:packages`
+- read:packages
+
+#### `user`
+- read:user
+- user:email
+- user:follow
+
+> 📌 Save the token securely — it's shown only once!
+
+---
+
+## 📝 Configure .npmrc
+
+Open the `.npmrc` file in the root of the repo and **add this line**:
+
+```ini
+//npm.pkg.github.com/:_authToken=${NPM_TOKEN}
 ```
 
 ---
 
-### 2. Node Version Manager (NVM)
+## 💻 Set Environment Token
 
-#### ➤ **Install NVM:**
+In your terminal:
 
-- **Windows:**  
-  [nvm-windows](https://github.com/coreybutler/nvm-windows/releases)
-
-  > 🔁 Restart the system after installation.
-
-- **macOS/Linux:**  
-  Install using the official script:
-  ```bash
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-  source ~/.bashrc    # or ~/.zshrc
-  ```
-
-#### ✅ Use NVM:
 ```bash
-nvm install <version>
-nvm use <version>
-node --version
+export NPM_TOKEN=<your-github-token>
+```
+
+> Do **not** include quotes.
+
+---
+
+## 🧱 Node.js Version Setup
+
+Install and use the required version:
+
+```bash
+nvm install 16.20.2
+nvm use 16.20.2
+```
+
+Then install dependencies:
+
+```bash
+npm install
+```
+
+> 🆘 If errors occur, contact your team.
+
+---
+
+## 🚀 Automaton JS Setup
+
+### 1. Download Required ZIPs
+
+Download both files from the following link:
+
+🔗 [https://bamboo.tandemdiabetes.com/browse/AUT-AUTL-633/artifact/shared/automatonjs/](https://bamboo.tandemdiabetes.com/browse/AUT-AUTL-633/artifact/shared/automatonjs/)
+
+- `automatonsjs.zip`
+- `Bamboo_simulators_<...>_Linux.zip`
+
+### 2. Linux Environment
+
+If you're on **Windows**, ensure you have **WSL (Windows Subsystem for Linux)** enabled and follow setup steps in this README.
+
+### 3. Node.js Version
+
+Automaton JS requires:
+
+```bash
+nvm install 18.17.1
+nvm use 18.17.1
+```
+
+### 4. Folder Structure
+
+Unzip the files and ensure the simulator is placed under:
+
+```
+sd-sim/
+├── gui
+├── HelperFunctions
+├── interface
+└── simulators   ← Place simulator files here
+```
+
+### 5. Run the Project
+
+```bash
+node index.js
+```
+
+Open browser:
+
+```
+http://localhost:4000
 ```
 
 ---
 
-### 3. Android Studio
+## 📱 Android Studio Setup
 
-**Download:**
+### 1. Download
 
-- All OS: [https://developer.android.com/studio](https://developer.android.com/studio)
+[Download Android Studio](https://developer.android.com/studio)
 
-**Setup Steps:**
-1. Install Android Studio.
-2. Launch and create a **sample project** to verify.
-3. Open **Device Manager** to create and run an **Android emulator**.
-4. Use **SDK Manager** to install SDKs as required.
+### 2. Setup Checklist
 
----
+- [ ] Install Android Studio
+- [ ] Create a sample project
+- [ ] Use **Device Manager** to create and start an emulator
+- [ ] Use **SDK Manager** to install:
+  - Platform Tools
+  - Emulator
+  - Correct Android API version
 
-### 4. Appium
+### 3. Set Environment Variables
 
-Install Appium globally using npm:
-```bash
-npm install --location=global appium
-```
-
-> May require `sudo` on macOS/Linux:
-```bash
-sudo npm install -g appium
-```
-
----
-
-### 5. Appium Inspector
-
-**Download:**
-
-- [Appium Inspector GitHub Releases](https://github.com/appium/appium-inspector/releases)
-
-Install the appropriate binary for:
-- Windows: `.exe`
-- macOS: `.dmg`
-- Linux: `.AppImage`
-
----
-
-### 6. Visual Studio Code
-
-**Download:**
-
-- [https://code.visualstudio.com/download](https://code.visualstudio.com/download)
-
-**Recommended Extensions:**
-- Appium
-- ESLint
-- Prettier
-- JavaScript / TypeScript support
-
----
-
-## ⚙️ Environment Variables Setup
-
-### ➤ Android SDK Path (`ANDROID_HOME`)
-
-| Platform | Suggested Value |
-|----------|-----------------|
-| **Windows** | `C:\Users\<YourName>\AppData\Local\Android\Sdk` |
-| **macOS**   | `/Users/<YourName>/Library/Android/sdk` |
-| **Linux**   | `/home/<YourName>/Android/Sdk` |
-
-Set the following:
-
-### **User or Shell Environment Variables:**
-
+#### For macOS/Linux:
 ```bash
 export ANDROID_HOME=<your-sdk-path>
 export PATH=$PATH:$ANDROID_HOME/tools
@@ -129,34 +174,56 @@ export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 ```
 
-For **macOS/Linux**, add this to your shell config (`~/.bashrc`, `~/.zshrc`, or `~/.bash_profile`).
-
-For **Windows**, set environment variables via:
-- **User Variables**:
-  - `ANDROID_HOME = <sdk_path>`
-  - `NVM_HOME = <nvm_path>`
-
-- **System PATH** (append):
-  ```
-  %NVM_HOME%
-  %NVM_SYMLINK%
-  %ANDROID_HOME%\tools
-  %ANDROID_HOME%\tools\bin
-  %ANDROID_HOME%\platform-tools
-  ```
-
-Example full path:
+#### For Windows (User Variables):
 ```
-C:\Users\<YourName>\AppData\Local\Android\Sdk\platform-tools
+ANDROID_HOME = C:\Users\<YourName>\AppData\Local\Android\Sdk
+```
+
+System `PATH` additions:
+```
+%ANDROID_HOME%\tools
+%ANDROID_HOME%\tools\bin
+%ANDROID_HOME%\platform-tools
 ```
 
 ---
 
-## ✅ Final Setup Checklist
+# ✅ Setup Checklists
+
+### 🧪 Automaton JS Only
 
 - [ ] Git installed
-- [ ] NVM installed and Node.js version configured
-- [ ] Android Studio + SDK + Emulator setup
-- [ ] Appium and Appium Inspector installed
-- [ ] Environment variables configured
-- [ ] VS Code with required extensions
+- [ ] Node.js v18.17.1 installed via NVM
+- [ ] Automaton zip files downloaded
+- [ ] Simulator placed in `sd-sim/simulators`
+- [ ] `node index.js` executed
+- [ ] Open `http://localhost:4000`
+
+---
+
+### 📱 Android Studio & Emulator Only
+
+- [ ] Android Studio installed
+- [ ] Sample project created
+- [ ] Emulator created in Device Manager
+- [ ] SDK components installed
+- [ ] Environment variables set
+
+---
+
+### 🧰 Full Setup
+
+If you're working with **both**, follow everything in:
+- [Automaton JS Only](#-automaton-js-only)
+- [Android Studio & Emulator Only](#-android-studio--emulator-only)
+
+And additionally:
+- [ ] Access to GitHub orgs
+- [ ] GitHub PAT created
+- [ ] `.npmrc` configured
+- [ ] `NPM_TOKEN` set in terminal
+
+---
+
+Cheers,  
+**Mobile Automation Team**
